@@ -3,14 +3,20 @@ from datetime import date
 
 # Função para calcular a idade
 def calcular_idade():
-    today = date.today()
-    birth_date = date(int(ano_entry.get()), int(mes_entry.get()), int(dia_entry.get()))
-    idade = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
-    Label(text=f"{nome_entry.get()}, você tem {idade} anos.").grid(row=6, column=1)
+    try:
+        today = date.today()
+        birth_date = date(int(ano_entry.get()), int(mes_entry.get()), int(dia_entry.get()))
+        idade = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+
+        Label(text=f"{nome_entry.get()}, você tem {idade} anos.").grid(row=6, column=1)
+    except ValueError:
+        Label(text='Digite os dados corretamente').grid(row=6, column=1)
+
 
 root = Tk()
 root.title("Calculadora de Idade")
 
+root.geometry('240x150')
 Label(text="Nome").grid(row=1, column=0)
 Label(text="Ano").grid(row=2, column=0)
 Label(text="Mês").grid(row=3, column=0)
